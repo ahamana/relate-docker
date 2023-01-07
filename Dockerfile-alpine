@@ -1,0 +1,84 @@
+# syntax=docker/dockerfile
+
+ARG NODE_VERSION=18
+ARG PYTHON_VERSION=3.11
+ARG PYTHON_SITE_PACKAGES=/usr/local/lib/python${PYTHON_VERSION}/site-packages
+ARG RELATE_HOME=/opt/relate
+
+FROM nikolaik/python-nodejs:python${PYTHON_VERSION}-nodejs${NODE_VERSION}-alpine AS builder
+
+ARG RELATE_HOME
+
+RUN <<EOF
+apk add --no-cache \
+    alpine-sdk \
+    libffi-dev
+
+npm update -g npm
+
+git clone --depth 1 https://github.com/inducer/relate.git ${RELATE_HOME}
+EOF
+
+WORKDIR ${RELATE_HOME}
+
+RUN <<EOF
+npm install
+npm run build
+
+${VENV}/bin/pip install -U poetry
+poetry export --without-hashes -o requirements.txt
+pip install --no-cache-dir \
+    -r requirements.txt \
+    psycopg2-binary
+
+rm -rf \
+    .ci \
+    .git \
+    .github \
+    doc \
+    docker-image-run-py \
+    node_modules \
+    tests
+rm \
+    .editorconfig \
+    .eslintrc.js \
+    .gitignore \
+    .gitlab-ci.yml \
+    .gitmodules \
+    README.rst \
+    SECURITY.md \
+    TODO \
+    docker-clean-containers.sh \
+    exercise-docker.py \
+    local_settings_example.py \
+    package*.json \
+    poetry.lock \
+    pyproject.toml \
+    repack-repositories.sh \
+    requirements.txt \
+    rollup.config.js
+EOF
+
+COPY relate ${RELATE_HOME}
+
+FROM python:${PYTHON_VERSION}-alpine AS runner
+
+ARG PYTHON_SITE_PACKAGES
+ARG RELATE_HOME
+ARG RELATE_USER=relate
+
+RUN <<EOF
+addgroup ${RELATE_USER}
+adduser -D -G ${RELATE_USER} -h ${RELATE_HOME} ${RELATE_USER}
+EOF
+
+COPY --from=builder ${PYTHON_SITE_PACKAGES} ${PYTHON_SITE_PACKAGES}
+COPY --from=builder --chown=${RELATE_USER} ${RELATE_HOME} ${RELATE_HOME}
+
+WORKDIR ${RELATE_HOME}
+
+USER ${RELATE_USER}
+
+EXPOSE 8000
+
+CMD [ "python", "manage.py", "runserver", "0:8000" ]
