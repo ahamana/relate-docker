@@ -5,7 +5,7 @@ ARG PYTHON_VERSION=3.11
 ARG PYTHON_SITE_PACKAGES=/usr/local/lib/python${PYTHON_VERSION}/site-packages
 ARG RELATE_HOME=/opt/relate
 
-FROM nikolaik/python-nodejs:python${PYTHON_VERSION}-nodejs${NODE_VERSION}-bullseye AS builder
+FROM nikolaik/python-nodejs:python${PYTHON_VERSION}-nodejs${NODE_VERSION} AS builder
 
 ARG RELATE_HOME
 
@@ -57,7 +57,7 @@ EOF
 
 COPY relate ${RELATE_HOME}
 
-FROM python:${PYTHON_VERSION}-slim-bullseye AS runner
+FROM python:${PYTHON_VERSION}-slim-bookworm AS runner
 
 ARG PYTHON_SITE_PACKAGES
 ARG RELATE_HOME
