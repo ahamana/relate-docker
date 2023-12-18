@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile
 
-ARG NODE_VERSION=18
+ARG NODE_VERSION=20
 ARG PYTHON_VERSION=3.12
 ARG PYTHON_SITE_PACKAGES=/usr/local/lib/python${PYTHON_VERSION}/site-packages
 ARG RELATE_HOME=/opt/relate
