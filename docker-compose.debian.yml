@@ -1,3 +1,3 @@
 services:
   app:
-    image: ahamana/relate:python3.11-debian
+    image: ahamana/relate:python3.12-debian
