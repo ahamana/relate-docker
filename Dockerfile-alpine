@@ -56,7 +56,7 @@ rm \
     pyproject.toml \
     repack-repositories.sh \
     requirements.txt \
-    rollup.config.js
+    rollup.config.mjs
 EOF
 
 COPY relate ${RELATE_HOME}
