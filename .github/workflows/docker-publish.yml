@@ -26,7 +26,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Extract metadata
-        id: meta
         uses: docker/metadata-action@v5
         with:
           images: ${{ github.repository_owner }}/relate
@@ -50,5 +49,7 @@ jobs:
           file: Dockerfile-${{ matrix.os }}
           build-args: |
             PYTHON_VERSION=${{ matrix.python-version }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ env.DOCKER_METADATA_OUTPUT_TAGS }}
           push: true
+          cache-from: type=gha,scope=${{ matrix.python-version }}-${{ matrix.os }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.python-version }}-${{ matrix.os }}

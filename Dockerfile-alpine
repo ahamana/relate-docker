@@ -13,9 +13,10 @@ apk add --no-cache \
     libffi-dev
 
 npm update -g npm
-
-git clone --depth 1 https://github.com/inducer/relate.git ${RELATE_HOME}
 EOF
+
+ADD https://api.github.com/repos/inducer/relate/git/refs/heads/main /dev/null
+RUN git clone -b main --depth 1 https://github.com/inducer/relate.git ${RELATE_HOME}
 
 WORKDIR ${RELATE_HOME}
 

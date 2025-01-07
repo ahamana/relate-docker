@@ -7,11 +7,10 @@ FROM nikolaik/python-nodejs:python${PYTHON_VERSION}-nodejs${NODE_VERSION} AS bui
 
 ARG RELATE_HOME
 
-RUN <<EOF
-npm update -g npm
+RUN npm update -g npm
 
-git clone --depth 1 https://github.com/inducer/relate.git ${RELATE_HOME}
-EOF
+ADD https://api.github.com/repos/inducer/relate/git/refs/heads/main /dev/null
+RUN git clone -b main --depth 1 https://github.com/inducer/relate.git ${RELATE_HOME}
 
 WORKDIR ${RELATE_HOME}
 
