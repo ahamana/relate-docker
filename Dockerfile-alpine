@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile
+
 ARG NODE_VERSION=22
 ARG PYTHON_VERSION=3.13
 ARG PYTHON_SITE_PACKAGES=/usr/local/lib/python${PYTHON_VERSION}/site-packages
@@ -15,7 +17,7 @@ apk add --no-cache \
 npm update -g npm
 EOF
 
-ADD https://api.github.com/repos/inducer/relate/git/refs/heads/main /dev/null
+ADD --link https://api.github.com/repos/inducer/relate/git/refs/heads/main /dev/null
 RUN git clone -b main --depth 1 https://github.com/inducer/relate.git ${RELATE_HOME}
 
 WORKDIR ${RELATE_HOME}
@@ -58,7 +60,7 @@ rm \
     rollup.config.mjs
 EOF
 
-COPY relate ${RELATE_HOME}
+COPY --link relate ${RELATE_HOME}
 
 FROM python:${PYTHON_VERSION}-alpine AS runner
 
@@ -71,8 +73,8 @@ addgroup ${RELATE_USER}
 adduser -D -G ${RELATE_USER} -h ${RELATE_HOME} ${RELATE_USER}
 EOF
 
-COPY --from=builder ${PYTHON_SITE_PACKAGES} ${PYTHON_SITE_PACKAGES}
-COPY --from=builder --chown=${RELATE_USER} ${RELATE_HOME} ${RELATE_HOME}
+COPY --link --from=builder ${PYTHON_SITE_PACKAGES} ${PYTHON_SITE_PACKAGES}
+COPY --link --from=builder --chown=${RELATE_USER} ${RELATE_HOME} ${RELATE_HOME}
 
 WORKDIR ${RELATE_HOME}
 
