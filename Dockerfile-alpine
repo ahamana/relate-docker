@@ -24,7 +24,9 @@ RUN <<EOF
 npm install
 npm run build
 
-${VENV}/bin/pip install -U poetry
+# Install "poetry-plugin-export" plugin, needed for poetry versions 2.0.0 or later.
+# https://github.com/python-poetry/poetry/releases/tag/2.0.0
+poetry self add poetry-plugin-export
 poetry export --without-hashes -o requirements.txt
 pip install --no-cache-dir \
     -r requirements.txt \
