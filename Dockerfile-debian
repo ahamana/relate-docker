@@ -1,5 +1,3 @@
-# syntax=docker/dockerfile
-
 ARG NODE_VERSION=22
 ARG PYTHON_VERSION=3.13
 ARG PYTHON_SITE_PACKAGES=/usr/local/lib/python${PYTHON_VERSION}/site-packages
@@ -11,7 +9,7 @@ ARG RELATE_HOME
 
 RUN npm update -g npm
 
-ADD --link https://api.github.com/repos/inducer/relate/git/refs/heads/main /dev/null
+ADD https://api.github.com/repos/inducer/relate/git/refs/heads/main /dev/null
 RUN git clone -b main --depth 1 https://github.com/inducer/relate.git ${RELATE_HOME}
 
 WORKDIR ${RELATE_HOME}
@@ -54,7 +52,7 @@ rm \
     rollup.config.mjs
 EOF
 
-COPY --link relate ${RELATE_HOME}
+COPY relate ${RELATE_HOME}
 
 FROM python:${PYTHON_VERSION}-slim-bookworm AS runner
 
@@ -67,8 +65,8 @@ groupadd ${RELATE_USER}
 useradd -g ${RELATE_USER} -d ${RELATE_HOME} ${RELATE_USER}
 EOF
 
-COPY --link --from=builder ${PYTHON_SITE_PACKAGES} ${PYTHON_SITE_PACKAGES}
-COPY --link --from=builder --chown=${RELATE_USER} ${RELATE_HOME} ${RELATE_HOME}
+COPY --from=builder ${PYTHON_SITE_PACKAGES} ${PYTHON_SITE_PACKAGES}
+COPY --from=builder --chown=${RELATE_USER} ${RELATE_HOME} ${RELATE_HOME}
 
 WORKDIR ${RELATE_HOME}
 
