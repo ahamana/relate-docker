@@ -5,6 +5,7 @@ ARG RELATE_HOME=/opt/relate
 
 FROM nikolaik/python-nodejs:python${PYTHON_VERSION}-nodejs${NODE_VERSION}-alpine AS builder
 
+ARG GIT_BRANCH=main
 ARG RELATE_HOME
 
 RUN <<EOF
@@ -15,8 +16,8 @@ apk add --no-cache \
 npm update -g npm
 EOF
 
-ADD https://api.github.com/repos/inducer/relate/git/refs/heads/main /dev/null
-RUN git clone -b main --depth 1 https://github.com/inducer/relate.git ${RELATE_HOME}
+ADD https://api.github.com/repos/inducer/relate/git/refs/heads/${GIT_BRANCH} /dev/null
+RUN git clone -b ${GIT_BRANCH} --depth 1 https://github.com/inducer/relate.git ${RELATE_HOME}
 
 WORKDIR ${RELATE_HOME}
 
