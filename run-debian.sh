@@ -1,2 +1,2 @@
 
-docker compose -f docker-compose.yml -f docker-compose.debian.yml -p relate-debian up -d
+docker compose -f compose.yml -f compose.debian.yml -p relate-debian up -d
