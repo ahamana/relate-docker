@@ -42,9 +42,11 @@ rm \
     .gitignore \
     .gitlab-ci.yml \
     .gitmodules \
+    LICENSE \
     README.rst \
     SECURITY.md \
     TODO \
+    collectstatic.sh \
     docker-clean-containers.sh \
     exercise-docker.py \
     local_settings_example.py \
@@ -53,7 +55,8 @@ rm \
     pyproject.toml \
     repack-repositories.sh \
     requirements.txt \
-    rollup.config.mjs
+    rollup.config.mjs \
+    update.sh
 EOF
 
 COPY relate ${RELATE_HOME}
