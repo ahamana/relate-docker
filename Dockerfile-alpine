@@ -13,7 +13,9 @@ ARG RELATE_HOME
 RUN <<EOF
 apk add --no-cache \
     alpine-sdk \
-    libffi-dev
+    cargo \
+    libffi-dev \
+    rust
 
 npm update -g npm
 EOF
