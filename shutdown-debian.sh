@@ -1,5 +1,4 @@
 
-export COMPOSE_FILE=compose.yml:compose.debian.yml
-export COMPOSE_PROJECT_NAME=relate-debian
+export COMPOSE_ENV_FILES=.env,.env.debian
 
 docker compose down --rmi all

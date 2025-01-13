@@ -1,5 +1,4 @@
 
-set COMPOSE_FILE=compose.yml;compose.alpine.yml
-set COMPOSE_PROJECT_NAME=relate-alpine
+set COMPOSE_ENV_FILES=.env,.env.alpine
 
 docker compose down --rmi all
