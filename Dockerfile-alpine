@@ -43,7 +43,6 @@ rm -rf \
     .github \
     doc \
     docker-image-run-py \
-    node_modules \
     tests
 rm \
     .editorconfig \
