@@ -1,2 +1,5 @@
 
-docker compose -f compose.yml -f compose.debian.yml -p relate-debian up -d
+set COMPOSE_FILE=compose.yml;compose.debian.yml
+set COMPOSE_PROJECT_NAME=relate-debian
+
+docker compose up -d
