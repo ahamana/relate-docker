@@ -5,12 +5,21 @@ ARG PYTHON_VERSION=3.13
 ARG PYTHON_SITE_PACKAGES=/usr/local/lib/python${PYTHON_VERSION}/site-packages
 ARG RELATE_HOME=/opt/relate
 
-FROM nikolaik/python-nodejs:python${PYTHON_VERSION}-nodejs${NODE_VERSION}-alpine AS builder
+FROM node:${NODE_VERSION}-alpine AS node
+
+FROM python:${PYTHON_VERSION}-alpine AS builder
 
 ARG GIT_BRANCH=main
 ARG RELATE_HOME
 
+COPY --from=node /usr/local/bin/node /usr/local/bin
+COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+
 RUN <<EOF
+ln -s /usr/local/bin/node /usr/local/bin/nodejs
+ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
+ln -s /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx
+
 apk add --no-cache \
     alpine-sdk \
     cargo \
@@ -29,6 +38,7 @@ RUN <<EOF
 npm install
 npm run build
 
+pip install --no-cache-dir poetry
 # Install "poetry-plugin-export" plugin, needed for poetry versions 2.0.0 or later.
 # https://github.com/python-poetry/poetry/releases/tag/2.0.0
 poetry self add poetry-plugin-export
