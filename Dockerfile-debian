@@ -10,8 +10,8 @@ FROM python:${PYTHON_VERSION}-bookworm AS builder
 ARG GIT_BRANCH=main
 ARG RELATE_HOME
 
-COPY --from=node /usr/local/bin/node /usr/local/bin
-COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --link --from=node /usr/local/bin/node /usr/local/bin/
+COPY --link --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 
 RUN <<EOF
 ln -s /usr/local/bin/node /usr/local/bin/nodejs
@@ -21,7 +21,7 @@ ln -s /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx
 npm update -g npm
 EOF
 
-ADD https://api.github.com/repos/inducer/relate/git/refs/heads/${GIT_BRANCH} /dev/null
+ADD --link https://api.github.com/repos/inducer/relate/git/refs/heads/${GIT_BRANCH} /dev/null
 RUN git clone -b ${GIT_BRANCH} --depth 1 https://github.com/inducer/relate.git ${RELATE_HOME}
 
 WORKDIR ${RELATE_HOME}
@@ -69,21 +69,23 @@ rm \
     update.sh
 EOF
 
-COPY relate ${RELATE_HOME}
+COPY --link relate ${RELATE_HOME}
 
 FROM python:${PYTHON_VERSION}-slim-bookworm AS runner
 
 ARG PYTHON_SITE_PACKAGES
 ARG RELATE_HOME
+ARG RELATE_GROUP_ID=1000
+ARG RELATE_USER_ID=1000
 ARG RELATE_USER=relate
 
 RUN <<EOF
-groupadd ${RELATE_USER}
-useradd -g ${RELATE_USER} -d ${RELATE_HOME} ${RELATE_USER}
+groupadd -g ${RELATE_GROUP_ID} ${RELATE_USER}
+useradd -g ${RELATE_USER} -u ${RELATE_USER_ID} -d ${RELATE_HOME} ${RELATE_USER}
 EOF
 
-COPY --from=builder ${PYTHON_SITE_PACKAGES} ${PYTHON_SITE_PACKAGES}
-COPY --from=builder --chown=${RELATE_USER} ${RELATE_HOME} ${RELATE_HOME}
+COPY --link --from=builder ${PYTHON_SITE_PACKAGES} ${PYTHON_SITE_PACKAGES}
+COPY --link --from=builder --chown=${RELATE_USER_ID} ${RELATE_HOME} ${RELATE_HOME}
 
 WORKDIR ${RELATE_HOME}
 
