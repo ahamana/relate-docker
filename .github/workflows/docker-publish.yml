@@ -52,5 +52,5 @@ jobs:
           tags: ${{ env.DOCKER_METADATA_OUTPUT_TAGS }}
           labels: ${{ env.DOCKER_METADATA_OUTPUT_LABELS }}
           push: true
-          cache-from: type=gha,scope=${{ matrix.python-version }}-${{ matrix.os }}
-          cache-to: type=gha,scope=${{ matrix.python-version }}-${{ matrix.os }},mode=max
+          cache-from: type=gha,scope=${{ env.DOCKER_METADATA_OUTPUT_VERSION }}
+          cache-to: type=gha,scope=${{ env.DOCKER_METADATA_OUTPUT_VERSION }},mode=max
