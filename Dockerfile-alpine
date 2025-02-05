@@ -52,6 +52,7 @@ rm -rf \
     .github \
     doc \
     docker-image-run-py \
+    frontend \
     tests
 rm \
     .editorconfig \
