@@ -2,7 +2,6 @@
 
 ARG NODE_VERSION=22
 ARG PYTHON_VERSION=3.13
-ARG PYTHON_SITE_PACKAGES=/usr/local/lib/python${PYTHON_VERSION}/site-packages
 ARG RELATE_HOME=/opt/relate
 
 FROM python:${PYTHON_VERSION}-bookworm AS builder
@@ -73,7 +72,6 @@ COPY --link relate ${RELATE_HOME}
 
 FROM python:${PYTHON_VERSION}-slim-bookworm AS runner
 
-ARG PYTHON_SITE_PACKAGES
 ARG RELATE_HOME
 ARG RELATE_GROUP_ID=1000
 ARG RELATE_USER_ID=1000
@@ -84,7 +82,7 @@ groupadd -g ${RELATE_GROUP_ID} ${RELATE_USER}
 useradd -g ${RELATE_USER} -u ${RELATE_USER_ID} -d ${RELATE_HOME} ${RELATE_USER}
 EOF
 
-COPY --link --from=builder ${PYTHON_SITE_PACKAGES} ${PYTHON_SITE_PACKAGES}
+COPY --link --from=builder /usr/local/lib/python${PYTHON_VERSION%.*}/site-packages /usr/local/lib/python${PYTHON_VERSION%.*}/site-packages
 COPY --link --from=builder --chown=${RELATE_USER_ID} ${RELATE_HOME} ${RELATE_HOME}
 
 WORKDIR ${RELATE_HOME}
