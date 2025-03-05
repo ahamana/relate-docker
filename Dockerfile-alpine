@@ -1,10 +1,13 @@
 # syntax=docker/dockerfile:1
 
 ARG NODE_VERSION=22
+ARG UV_VERSION=0.6.4
 ARG PYTHON_VERSION=3.13
 ARG RELATE_HOME=/opt/relate
 
 FROM node:${NODE_VERSION}-alpine AS node
+
+FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
 
 FROM python:${PYTHON_VERSION}-alpine AS builder
 
@@ -13,6 +16,7 @@ ARG RELATE_HOME
 
 COPY --link --from=node /usr/local/bin/node /usr/local/bin/
 COPY --link --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --link --from=uv /uv /usr/local/bin/
 
 RUN <<EOF
 ln -s /usr/local/bin/node /usr/local/bin/nodejs
@@ -37,12 +41,8 @@ RUN <<EOF
 npm install
 npm run build
 
-pip install --no-cache-dir poetry
-# Install "poetry-plugin-export" plugin, needed for poetry versions 2.0.0 or later.
-# https://github.com/python-poetry/poetry/releases/tag/2.0.0
-poetry self add poetry-plugin-export
-poetry export --without-hashes -o requirements.txt
-pip install --no-cache-dir \
+uv export --frozen --no-dev --format requirements-txt -o requirements.txt
+uv pip install -n --system \
     -r requirements.txt \
     psycopg2-binary
 
@@ -69,12 +69,12 @@ rm \
     exercise-docker.py \
     local_settings_example.py \
     package*.json \
-    poetry.lock \
     pyproject.toml \
     repack-repositories.sh \
     requirements.txt \
     rollup.config.mjs \
-    update.sh
+    update.sh \
+    uv.lock
 EOF
 
 COPY --link relate ${RELATE_HOME}
