@@ -35,7 +35,7 @@ RUN <<EOF
 npm install
 npm run build
 
-uv export --frozen --no-dev --format requirements-txt -o requirements.txt
+uv export --frozen -n --no-dev --no-hashes --format requirements-txt -o requirements.txt
 uv pip install -n --system \
     -r requirements.txt \
     psycopg2-binary
