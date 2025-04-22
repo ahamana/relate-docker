@@ -14,6 +14,10 @@ FROM python:${PYTHON_VERSION}-bookworm AS builder
 ARG GIT_BRANCH=main
 ARG RELATE_HOME
 
+ENV UV_COMPILE_BYTECODE=true
+ENV UV_NO_CACHE=true
+ENV UV_SYSTEM_PYTHON=true
+
 COPY --link --from=node /usr/local/bin/node /usr/local/bin/
 COPY --link --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 COPY --link --from=uv /uv /usr/local/bin/
@@ -35,8 +39,8 @@ RUN <<EOF
 npm install
 npm run build
 
-uv export --frozen -n --no-dev --no-hashes -o requirements.txt
-uv pip install -n --system \
+uv export --frozen --no-dev --no-hashes -o requirements.txt
+uv pip install \
     -r requirements.txt \
     psycopg2-binary
 
