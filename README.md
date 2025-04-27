@@ -11,31 +11,32 @@ This repository provides Docker configurations for running [RELATE](https://gith
 ## Requirements
 
 - Docker and Docker Compose
+- [Task](https://taskfile.dev/)
 
 ## Quick Start
 
 ### Debian-based Setup
 
 ```bash
-# Linux/macOS
-./setup-debian.sh
-./run-debian.sh
-
-# Windows
-setup-debian.bat
-run-debian.bat
+task setup-debian
 ```
 
 ### Alpine-based Setup
 
 ```bash
-# Linux/macOS
-./setup-alpine.sh
-./run-alpine.sh
+task setup-alpine
+```
 
-# Windows
-setup-alpine.bat
-run-alpine.bat
+### Debian-based Run
+
+```bash
+task run-debian
+```
+
+### Alpine-based Run
+
+```bash
+task run-alpine
 ```
 
 ## Configuration
@@ -75,26 +76,18 @@ The environment provides:
 - Email testing: Mailpit (accessible at `http://localhost:8025`)
 - RELATE Interface: `http://localhost`
 
-## Shutting Down
+## Shutdown
 
 ### Debian-based Shutdown
 
 ```bash
-# Linux/macOS
-./shutdown-debian.sh
-
-# Windows
-shutdown-debian.bat
+task shutdown-debian
 ```
 
 ### Alpine-based Shutdown
 
 ```bash
-# Linux/macOS
-./shutdown-alpine.sh
-
-# Windows
-shutdown-alpine.bat
+task shutdown-alpine
 ```
 
 ## License
