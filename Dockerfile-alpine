@@ -91,6 +91,9 @@ ARG RELATE_USER_ID=1000
 ARG RELATE_USER=relate
 
 RUN <<EOF
+apk add --no-cache \
+    libgcc
+
 addgroup -g ${RELATE_GROUP_ID} ${RELATE_USER}
 adduser -D -G ${RELATE_USER} -u ${RELATE_USER_ID} -h ${RELATE_HOME} ${RELATE_USER}
 EOF
