@@ -18,17 +18,9 @@ ENV UV_COMPILE_BYTECODE=true
 ENV UV_NO_CACHE=true
 ENV UV_SYSTEM_PYTHON=true
 
-COPY --link --from=node /usr/local/bin/node /usr/local/bin/
+COPY --link --from=node /usr/local/bin /usr/local/bin
 COPY --link --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 COPY --link --from=uv /uv /usr/local/bin/
-
-RUN <<EOF
-ln -s /usr/local/bin/node /usr/local/bin/nodejs
-ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
-ln -s /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx
-
-npm update -g npm
-EOF
 
 ADD --link https://api.github.com/repos/inducer/relate/git/refs/heads/${GIT_BRANCH} /dev/null
 RUN git clone -b ${GIT_BRANCH} --depth 1 https://github.com/inducer/relate.git ${RELATE_HOME}
@@ -36,6 +28,7 @@ RUN git clone -b ${GIT_BRANCH} --depth 1 https://github.com/inducer/relate.git $
 WORKDIR ${RELATE_HOME}
 
 RUN <<EOF
+npm update -g npm
 npm install
 npm run build
 
