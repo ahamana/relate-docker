@@ -78,7 +78,7 @@ ARG RELATE_USER=relate
 
 RUN <<EOF
 groupadd -g ${RELATE_GROUP_ID} ${RELATE_USER}
-useradd -g ${RELATE_USER} -u ${RELATE_USER_ID} -d ${RELATE_HOME} ${RELATE_USER}
+useradd -l -g ${RELATE_USER} -u ${RELATE_USER_ID} -d ${RELATE_HOME} ${RELATE_USER}
 EOF
 
 COPY --link --from=builder /usr/local/lib/python${PYTHON_VERSION%.*}/site-packages /usr/local/lib/python${PYTHON_VERSION%.*}/site-packages
