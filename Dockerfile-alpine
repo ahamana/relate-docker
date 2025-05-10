@@ -15,6 +15,7 @@ ARG GIT_BRANCH=main
 ARG RELATE_HOME
 
 ENV UV_COMPILE_BYTECODE=true
+ENV UV_FROZEN=true
 ENV UV_NO_CACHE=true
 ENV UV_SYSTEM_PYTHON=true
 
@@ -38,7 +39,7 @@ npm update -g npm
 npm install
 npm run build
 
-uv export --frozen --no-dev -o pylock.toml
+uv export --no-dev -o pylock.toml
 uv pip install -r pylock.toml
 uv pip install psycopg2-binary
 
