@@ -50,21 +50,28 @@ The following default values are set in the `.env` file:
 - `EMAIL_DOMAIN`: example.com
   - Specifies the domain part of email addresses.
 - `EMAIL_HOST_USER`: (empty)
-  - Authentication username for the SMTP server. Can be left empty when using Mailpit.
+  - Authentication username for the SMTP server.<br>
+    Can be left empty when using Mailpit.
 - `EMAIL_HOST_PASSWORD`: (empty)
-  - Authentication password for the SMTP server. Can be left empty when using Mailpit.
+  - Authentication password for the SMTP server.<br>
+    Can be left empty when using Mailpit.
 - `RELATE_DOMAIN`: localhost
-  - Specifies the domain name for the RELATE application. Can be kept as "localhost" for local environments.
+  - Specifies the domain name for the RELATE application.<br>
+    Can be kept as "localhost" for local environments.
 - `RELATE_ADMIN_USER`: admin
-  - Username for the administrator account. Automatically created on first startup.
+  - Username for the administrator account.<br>
+    Automatically created on first startup.
 - `RELATE_ADMIN_PASSWORD`: ${RELATE_ADMIN_USER} (admin)
-  - Password for the administrator account. By default, it uses the same value as the username.
+  - Password for the administrator account.<br>
+    By default, it uses the same value as the username.
 - `RELATE_ADMIN_EMAIL`: ${RELATE_ADMIN_USER}@${EMAIL_DOMAIN} (admin@example.com)
-  - Email address for the administrator account. Automatically generated from the username and email domain.
+  - Email address for the administrator account.<br>
+    Automatically generated from the username and email domain.
 - `POSTGRES_USER`: relate
   - PostgreSQL database username.
 - `POSTGRES_PASSWORD`: relate
-  - PostgreSQL database password. Recommended to change to a strong password in production environments.
+  - PostgreSQL database password.<br>
+    Recommended to change to a strong password in production environments.
 - `POSTGRES_DB`: relate
   - PostgreSQL database name.
 - `TZ`: Asia/Tokyo
