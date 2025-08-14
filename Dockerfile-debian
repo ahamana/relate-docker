@@ -18,6 +18,7 @@ ENV UV_COMPILE_BYTECODE=true
 ENV UV_FROZEN=true
 ENV UV_NO_CACHE=true
 ENV UV_NO_DEV=true
+ENV UV_PROJECT_ENVIRONMENT=/usr/local
 ENV UV_SYSTEM_PYTHON=true
 
 COPY --link --from=node /usr/local/bin /usr/local/bin
@@ -34,8 +35,7 @@ npm update -g npm
 npm install
 npm run build
 
-uv export -o pylock.toml
-uv pip install -r pylock.toml
+uv sync
 uv pip install psycopg2-binary
 
 rm -rf \
@@ -58,7 +58,6 @@ rm \
     LICENSE \
     local_settings_example.py \
     package*.json \
-    pylock.toml \
     pyproject.toml \
     README.rst \
     repack-repositories.sh \
