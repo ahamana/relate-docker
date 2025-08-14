@@ -29,6 +29,7 @@ RUN apk add --no-cache \
     alpine-sdk \
     cargo \
     libffi-dev \
+    libpq-dev \
     rust
 
 ADD --link https://api.github.com/repos/inducer/relate/git/refs/heads/${GIT_BRANCH} /dev/null
@@ -41,8 +42,7 @@ npm update -g npm
 npm install
 npm run build
 
-uv sync
-uv pip install psycopg2-binary
+uv sync --extra postgres
 
 rm -rf \
     .ci \
@@ -85,7 +85,8 @@ ARG RELATE_USER=relate
 
 RUN <<EOF
 apk add --no-cache \
-    libgcc
+    libgcc \
+    libpq
 
 addgroup -g ${RELATE_GROUP_ID} ${RELATE_USER}
 adduser -D -G ${RELATE_USER} -u ${RELATE_USER_ID} -h ${RELATE_HOME} ${RELATE_USER}

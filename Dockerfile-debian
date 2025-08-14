@@ -35,8 +35,7 @@ npm update -g npm
 npm install
 npm run build
 
-uv sync
-uv pip install psycopg2-binary
+uv sync --extra postgres
 
 rm -rf \
     .ci \
@@ -78,6 +77,12 @@ ARG RELATE_USER_ID=1000
 ARG RELATE_USER=relate
 
 RUN <<EOF
+apt-get update
+apt-get install -y --no-install-recommends \
+    libpq5
+apt-get clean
+rm -rf /var/lib/apt/lists/*
+
 groupadd -g ${RELATE_GROUP_ID} ${RELATE_USER}
 useradd -l -g ${RELATE_USER} -u ${RELATE_USER_ID} -d ${RELATE_HOME} ${RELATE_USER}
 EOF
