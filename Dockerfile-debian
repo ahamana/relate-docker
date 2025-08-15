@@ -5,11 +5,11 @@ ARG UV_VERSION=0.8
 ARG PYTHON_VERSION=3.13
 ARG RELATE_HOME=/opt/relate
 
-FROM node:${NODE_VERSION}-bookworm-slim AS node
+FROM node:${NODE_VERSION}-trixie-slim AS node
 
 FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
 
-FROM python:${PYTHON_VERSION}-bookworm AS builder
+FROM python:${PYTHON_VERSION}-trixie AS builder
 
 ARG GIT_BRANCH=main
 ARG RELATE_HOME
@@ -69,7 +69,7 @@ EOF
 
 COPY --link relate ${RELATE_HOME}
 
-FROM python:${PYTHON_VERSION}-slim-bookworm AS runner
+FROM python:${PYTHON_VERSION}-slim-trixie AS runner
 
 ARG RELATE_HOME
 ARG RELATE_GROUP_ID=1000
