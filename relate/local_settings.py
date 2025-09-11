@@ -14,7 +14,7 @@ ALLOWED_HOSTS = [
 ]
 
 # Configure the following as url as above.
-RELATE_BASE_URL = f'http://{os.getenv("RELATE_DOMAIN")}'
+RELATE_BASE_URL = f"http://{os.getenv('RELATE_DOMAIN')}"
 
 from django.utils.translation import gettext_noop  # noqa
 
@@ -29,7 +29,7 @@ from django.utils.translation import gettext_noop  # noqa
 #
 DATABASES = {
     "default": {
-        "ENGINE": f'django.db.backends.{os.getenv("DB_ENGINE")}',
+        "ENGINE": f"django.db.backends.{os.getenv('DB_ENGINE')}",
         "NAME": os.getenv("DB_NAME"),
         "USER": os.getenv("DB_USER"),
         "PASSWORD": os.getenv("DB_PASSWORD"),
@@ -108,7 +108,7 @@ EMAIL_PORT = os.getenv("EMAIL_PORT")
 EMAIL_USE_TLS = False
 
 ROBOT_EMAIL_FROM = (
-    f'RELATE Admin <{os.getenv("RELATE_ADMIN_USER")}@{os.getenv("EMAIL_DOMAIN")}>'
+    f"RELATE Admin <{os.getenv('RELATE_ADMIN_USER')}@{os.getenv('EMAIL_DOMAIN')}>"
 )
 RELATE_ADMIN_EMAIL_LOCALE = "ja_JP"
 
@@ -117,7 +117,7 @@ SERVER_EMAIL = ROBOT_EMAIL_FROM
 ADMINS = (
     (
         "RELATE Admin",
-        f'{os.getenv("RELATE_ADMIN_USER")}@{os.getenv("EMAIL_DOMAIN")}',
+        f"{os.getenv('RELATE_ADMIN_USER')}@{os.getenv('EMAIL_DOMAIN')}",
     ),
 )
 
@@ -191,17 +191,17 @@ if RELATE_ENABLE_MULTIPLE_SMTP:
     # This will be used as default connection when other keys are not set.
     EMAIL_CONNECTION_DEFAULT = "robot"
 
-    NO_REPLY_EMAIL_FROM = f'Noreply <noreply_example@{os.getenv("EMAIL_DOMAIN")}>'
+    NO_REPLY_EMAIL_FROM = f"Noreply <noreply_example@{os.getenv('EMAIL_DOMAIN')}>"
     NOTIFICATION_EMAIL_FROM = (
-        f'Notification <notification_example@{os.getenv("EMAIL_DOMAIN")}>'
+        f"Notification <notification_example@{os.getenv('EMAIL_DOMAIN')}>"
     )
     GRADER_FEEDBACK_EMAIL_FROM = (
-        f'Feedback <feedback_example@{os.getenv("EMAIL_DOMAIN")}>'
+        f"Feedback <feedback_example@{os.getenv('EMAIL_DOMAIN')}>"
     )
     STUDENT_INTERACT_EMAIL_FROM = (
-        f'interaction <feedback_example@{os.getenv("EMAIL_DOMAIN")}>'
+        f"interaction <feedback_example@{os.getenv('EMAIL_DOMAIN')}>"
     )
-    ENROLLMENT_EMAIL_FROM = f'Enrollment <enroll@{os.getenv("EMAIL_DOMAIN")}>'
+    ENROLLMENT_EMAIL_FROM = f"Enrollment <enroll@{os.getenv('EMAIL_DOMAIN')}>"
 
 
 # }}}
@@ -413,7 +413,7 @@ RELATE_DOCKER_TLS_CONFIG = None
 
 RELATE_MAINTENANCE_MODE = False
 
-RELATE_MAINTENANCE_MODE_EXCEPTIONS = []
+RELATE_MAINTENANCE_MODE_EXCEPTIONS: list[str] = []
 # RELATE_MAINTENANCE_MODE_EXCEPTIONS = ["192.168.1.0/24"]
 
 # May be set to a string to set a sitewide announcement visible on every page.
@@ -484,6 +484,7 @@ RELATE_TICKET_MINUTES_VALID_AFTER_USE = 12 * 60
 
 if RELATE_SIGN_IN_BY_SAML2_ENABLED:
     from os import path
+
     import saml2.saml
 
     _BASE_URL = "https://relate.cs.illinois.edu"
