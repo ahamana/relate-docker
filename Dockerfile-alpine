@@ -19,7 +19,6 @@ ENV UV_FROZEN=true
 ENV UV_NO_CACHE=true
 ENV UV_NO_DEV=true
 ENV UV_PROJECT_ENVIRONMENT=/usr/local
-ENV UV_SYSTEM_PYTHON=true
 
 COPY --link --from=node /usr/local/bin /usr/local/bin
 COPY --link --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
