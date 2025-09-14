@@ -74,7 +74,7 @@ The following default values are set in the `.env` file:
     Recommended to change to a strong password in production environments.
 - `POSTGRES_DB`: relate
   - PostgreSQL database name.
-- `TZ`: Asia/Tokyo
+- `TZ`: UTC
   - Specifies the timezone.
 
 The environment provides:
