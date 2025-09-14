@@ -24,7 +24,7 @@ services:
       TZ: ${TZ}
     volumes:
       - type: volume
-        source: app-volume
+        source: app-git-storage
         target: /opt/relate/git-roots
     depends_on:
       db:
@@ -47,7 +47,7 @@ services:
       test: pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
     volumes:
       - type: volume
-        source: db-volume
+        source: db-data
         target: /var/lib/postgresql/data
 
   smtp:
@@ -58,5 +58,5 @@ services:
         target: 8025
 
 volumes:
-  app-volume:
-  db-volume:
+  app-git-storage:
+  db-data:
