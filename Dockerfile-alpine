@@ -71,6 +71,10 @@ rm \
     TODO \
     update.sh \
     uv.lock
+find \
+    -name .gitkeep \
+    -type f \
+    -delete
 EOF
 
 COPY --link relate ${RELATE_HOME}
