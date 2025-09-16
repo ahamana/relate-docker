@@ -70,8 +70,6 @@ find \
     -delete
 EOF
 
-COPY --link relate ${RELATE_HOME}
-
 FROM python:${PYTHON_VERSION}-slim-trixie AS runner
 
 ARG RELATE_HOME

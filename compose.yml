@@ -23,6 +23,10 @@ services:
       DJANGO_SUPERUSER_EMAIL: ${RELATE_ADMIN_EMAIL}
       TZ: ${TZ}
     volumes:
+      - type: bind
+        source: relate/local_settings.py
+        target: /opt/relate/local_settings.py
+        read_only: true
       - type: volume
         source: app-git-storage
         target: /opt/relate/git-roots
