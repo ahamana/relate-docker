@@ -61,7 +61,7 @@ jobs:
         id: build
         uses: docker/build-push-action@v6
         with:
-          file: Dockerfile-${{ matrix.os }}
+          file: Dockerfile.${{ matrix.os }}
           build-args: |
             PYTHON_VERSION=${{ matrix.python-version }}
           labels: ${{ env.DOCKER_METADATA_OUTPUT_LABELS }}
