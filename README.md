@@ -45,8 +45,6 @@ The environment is configured through the `.env` file which contains all the nec
 
 ### Default Settings
 
-The following default values are set in the `.env` file:
-
 - `EMAIL_DOMAIN`: example.com
   - Specifies the domain part of email addresses.
 - `EMAIL_HOST_USER`: (empty)
@@ -76,6 +74,8 @@ The following default values are set in the `.env` file:
   - PostgreSQL database name.
 - `TZ`: UTC
   - Specifies the timezone.
+
+## Services
 
 The environment provides:
 
