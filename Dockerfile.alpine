@@ -72,8 +72,8 @@ rm \
     update.sh \
     uv.lock
 find \
-    -name .gitkeep \
     -type f \
+    -name .gitkeep \
     -delete
 EOF
 
