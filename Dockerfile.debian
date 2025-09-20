@@ -30,7 +30,6 @@ RUN git clone -b ${GIT_BRANCH} --depth 1 https://github.com/inducer/relate.git $
 WORKDIR ${RELATE_HOME}
 
 RUN <<EOF
-npm update -g npm
 npm install
 npm run build
 
