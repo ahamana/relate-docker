@@ -47,7 +47,6 @@ rm -rf \
 rm \
     .editorconfig \
     .eslintrc.js \
-    .gitignore \
     .gitlab-ci.yml \
     .gitmodules \
     collectstatic.sh \
@@ -66,7 +65,10 @@ rm \
     uv.lock
 find \
     -type f \
-    -name .gitkeep \
+    \( \
+        -name .gitignore \
+    -or -name .gitkeep \
+    \) \
     -delete
 EOF
 
