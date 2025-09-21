@@ -1,6 +1,7 @@
 services:
   app:
     container_name: relate
+    restart: unless-stopped
     ports:
       - published: 80
         target: 8000
@@ -39,6 +40,7 @@ services:
   db:
     container_name: postgres
     image: postgres:17
+    restart: unless-stopped
     ports:
       - published: 5432
         target: 5432
@@ -57,6 +59,7 @@ services:
   smtp:
     container_name: mailpit
     image: axllent/mailpit
+    restart: unless-stopped
     ports:
       - published: 8025
         target: 8025
