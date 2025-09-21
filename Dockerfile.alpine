@@ -78,7 +78,7 @@ find \
     -delete
 EOF
 
-FROM python:${PYTHON_VERSION}-alpine AS runner
+FROM python:${PYTHON_VERSION}-alpine
 
 ARG RELATE_HOME
 ARG RELATE_GROUP_ID=1000

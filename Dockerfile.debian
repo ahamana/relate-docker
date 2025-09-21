@@ -71,7 +71,7 @@ find \
     -delete
 EOF
 
-FROM python:${PYTHON_VERSION}-slim-trixie AS runner
+FROM python:${PYTHON_VERSION}-slim-trixie
 
 ARG RELATE_HOME
 ARG RELATE_GROUP_ID=1000
