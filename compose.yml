@@ -1,6 +1,7 @@
 services:
   app:
     container_name: relate
+    image: ahamana/relate:python3.13-${DISTRIBUTION}
     restart: unless-stopped
     ports:
       - published: 80
