@@ -1,15 +1,16 @@
 # syntax=docker/dockerfile:1
 
+ARG DEBIAN_CODENAME=trixie
 ARG NODE_VERSION=lts
 ARG UV_VERSION=0.8
 ARG PYTHON_VERSION=3.13
 ARG RELATE_HOME=/opt/relate
 
-FROM node:${NODE_VERSION}-trixie-slim AS node
+FROM node:${NODE_VERSION}-${DEBIAN_CODENAME}-slim AS node
 
 FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
 
-FROM python:${PYTHON_VERSION}-trixie AS builder
+FROM python:${PYTHON_VERSION}-${DEBIAN_CODENAME} AS builder
 
 ARG GIT_BRANCH=main
 ARG RELATE_HOME
@@ -71,7 +72,7 @@ find \
     -delete
 EOF
 
-FROM python:${PYTHON_VERSION}-slim-trixie
+FROM python:${PYTHON_VERSION}-slim-${DEBIAN_CODENAME}
 
 ARG RELATE_HOME
 ARG RELATE_GROUP_ID=1000
