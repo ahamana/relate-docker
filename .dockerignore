@@ -5,7 +5,7 @@
 .github
 .gitignore
 .vscode
-compose*.yml
+compose.yml
 Dockerfile*
 LICENSE
 relate
