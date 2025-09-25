@@ -79,9 +79,13 @@ The environment is configured through the `.env` file which contains all the nec
 
 The environment provides:
 
-- Database: PostgreSQL
-- Email testing: Mailpit (accessible at `http://localhost:8025`)
-- RELATE Interface: `http://localhost`
+- Database
+  - PostgreSQL
+- Email testing
+  - Mailpit
+    - Accessible at `http://localhost:8025`
+- RELATE interface
+  - `http://localhost`
 
 ## Shutdown
 
