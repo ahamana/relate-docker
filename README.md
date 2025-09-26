@@ -1,4 +1,4 @@
-# Relate Docker
+# RELATE Docker
 
 This repository provides Docker configurations for running [RELATE](https://github.com/inducer/relate) in a containerized environment.
 
