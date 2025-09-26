@@ -9,7 +9,7 @@ FROM node:${NODE_VERSION}-alpine AS node
 
 FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
 
-FROM python:${PYTHON_VERSION}-alpine AS builder
+FROM python:3.12-alpine AS builder
 
 ARG GIT_BRANCH=main
 ARG RELATE_HOME
