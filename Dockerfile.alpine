@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 ARG NODE_VERSION=lts
-ARG UV_VERSION=0.8
+ARG UV_VERSION=0.9
 ARG PYTHON_VERSION=3.13
 ARG RELATE_HOME=/opt/relate
 
