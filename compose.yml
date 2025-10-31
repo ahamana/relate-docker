@@ -55,7 +55,7 @@ services:
     volumes:
       - type: volume
         source: db-data
-        target: /var/lib/postgresql/data
+        target: /var/lib/postgresql
 
   smtp:
     container_name: mailpit
