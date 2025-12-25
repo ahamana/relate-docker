@@ -8,9 +8,7 @@ ARG RELATE_HOME=/opt/relate
 
 FROM node:${NODE_VERSION}-${DEBIAN_CODENAME}-slim AS node
 
-FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
-
-FROM python:${PYTHON_VERSION}-${DEBIAN_CODENAME} AS builder
+FROM ghcr.io/astral-sh/uv:${UV_VERSION}-python${PYTHON_VERSION}-${DEBIAN_CODENAME} AS builder
 
 ARG GIT_BRANCH=main
 ARG RELATE_HOME
@@ -23,7 +21,6 @@ ENV UV_PROJECT_ENVIRONMENT=/usr/local
 
 COPY --link --from=node /usr/local/bin /usr/local/bin
 COPY --link --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
-COPY --link --from=uv /uv /usr/local/bin/
 
 ADD --link https://api.github.com/repos/inducer/relate/git/refs/heads/${GIT_BRANCH} /dev/null
 RUN git clone -b ${GIT_BRANCH} --depth 1 https://github.com/inducer/relate.git ${RELATE_HOME}
