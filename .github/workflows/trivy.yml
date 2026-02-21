@@ -36,7 +36,7 @@ jobs:
             echo '### Security Output'
             echo '<details><summary>Click to expand</summary>'
             echo ''
-            echo '```'
+            echo '```terraform'
             cat trivy.txt
             echo '```'
             echo '</details>'
