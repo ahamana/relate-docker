@@ -1,6 +1,6 @@
-# RELATE Docker
+# Relate Docker
 
-This repository provides Docker configurations for running [RELATE](https://github.com/inducer/relate) in a containerized environment.
+This repository provides Docker configurations for running [Relate](https://github.com/inducer/relate) in a containerized environment.
 
 ## Features
 
@@ -54,7 +54,7 @@ The environment is configured through the `.env` file which contains all the nec
   - Authentication password for the SMTP server.<br>
     Can be left empty when using Mailpit.
 - `RELATE_DOMAIN`: localhost
-  - Specifies the domain name for the RELATE application.<br>
+  - Specifies the domain name for the Relate application.<br>
     Can be kept as "localhost" for local environments.
 - `RELATE_ADMIN_USER`: admin
   - Username for the administrator account.<br>
@@ -84,7 +84,7 @@ The environment provides:
 - Email testing
   - Mailpit
     - Accessible at `http://localhost:8025`
-- RELATE interface
+- Relate interface
   - `http://localhost`
 
 ## Stop
