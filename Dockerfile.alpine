@@ -81,9 +81,6 @@ ARG RELATE_GROUP_ID=1000
 ARG RELATE_USER_ID=1000
 ARG RELATE_USER=relate
 
-ENV UV_NO_SYNC=true
-ENV UV_PROJECT_ENVIRONMENT=/usr/local
-
 RUN <<EOF
 apk add --no-cache \
     bash \
