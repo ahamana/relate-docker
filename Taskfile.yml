@@ -2,10 +2,11 @@ version: 3
 
 tasks:
   default:
-    cmd: task -a
+    cmd: task -l
     silent: true
 
   setup: &setup
+    desc: Set up RELATE
     env:
       COMPOSE_PROJECT_NAME: relate-{{.DISTRIBUTION}}
       DISTRIBUTION: "{{.DISTRIBUTION}}"
@@ -17,14 +18,17 @@ tasks:
             - alpine
             - debian
 
-  run:
+  start:
     <<: *setup
+    desc: Start RELATE
     cmd: docker compose up -d {{.CLI_ARGS}}
 
-  shutdown:
+  stop:
     <<: *setup
+    desc: Stop RELATE
     cmd: docker compose down {{.CLI_ARGS}}
 
   logs:
     <<: *setup
+    desc: Display Docker Compose logs
     cmd: docker compose logs -f {{.CLI_ARGS}}
