@@ -52,7 +52,6 @@ rm \
     .eslintrc.js \
     .gitlab-ci.yml \
     .gitmodules \
-    collectstatic.sh \
     docker-clean-containers.sh \
     exercise-docker.py \
     LICENSE \
@@ -75,15 +74,19 @@ find \
     -delete
 EOF
 
-FROM python:${PYTHON_VERSION}-alpine
+FROM ghcr.io/astral-sh/uv:${UV_VERSION}-python${PYTHON_VERSION}-alpine
 
 ARG RELATE_HOME
 ARG RELATE_GROUP_ID=1000
 ARG RELATE_USER_ID=1000
 ARG RELATE_USER=relate
 
+ENV UV_NO_SYNC=true
+ENV UV_PROJECT_ENVIRONMENT=/usr/local
+
 RUN <<EOF
 apk add --no-cache \
+    bash \
     libgcc \
     libpq
 
@@ -100,6 +103,6 @@ USER ${RELATE_USER}
 
 EXPOSE 8000
 
-CMD ["python", "manage.py", "runserver", "0:8000"]
+CMD ["uv", "run", "python", "manage.py", "runserver", "0:8000"]
 
 # vim:set filetype=dockerfile:

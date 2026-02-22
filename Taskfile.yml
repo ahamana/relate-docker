@@ -11,7 +11,9 @@ tasks:
       COMPOSE_PROJECT_NAME: relate-{{.DISTRIBUTION}}
       DISTRIBUTION: "{{.DISTRIBUTION}}"
     cmds:
-      - cmd: docker compose run --rm app sh -c "python manage.py migrate && python manage.py createsuperuser --noinput"
+      - cmd: docker compose run --rm app uv run python manage.py migrate
+      - cmd: docker compose run --rm app uv run python manage.py createsuperuser --noinput
+      - cmd: docker compose run --rm app ./collectstatic.sh
     requires:
       vars:
         - name: DISTRIBUTION
