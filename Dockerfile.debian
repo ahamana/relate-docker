@@ -68,7 +68,7 @@ find \
     -delete
 EOF
 
-FROM ghcr.io/astral-sh/uv:${UV_VERSION}-python${PYTHON_VERSION}-slim-${DEBIAN_CODENAME}
+FROM ghcr.io/astral-sh/uv:${UV_VERSION}-python${PYTHON_VERSION}-${DEBIAN_CODENAME}-slim
 
 ARG RELATE_HOME
 ARG RELATE_GROUP_ID=1000
