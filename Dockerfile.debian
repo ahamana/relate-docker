@@ -46,7 +46,6 @@ rm \
     .eslintrc.js \
     .gitlab-ci.yml \
     .gitmodules \
-    collectstatic.sh \
     docker-clean-containers.sh \
     exercise-docker.py \
     LICENSE \
@@ -69,12 +68,15 @@ find \
     -delete
 EOF
 
-FROM python:${PYTHON_VERSION}-slim-${DEBIAN_CODENAME}
+FROM ghcr.io/astral-sh/uv:${UV_VERSION}-python${PYTHON_VERSION}-slim-${DEBIAN_CODENAME}
 
 ARG RELATE_HOME
 ARG RELATE_GROUP_ID=1000
 ARG RELATE_USER_ID=1000
 ARG RELATE_USER=relate
+
+ENV UV_NO_SYNC=true
+ENV UV_PROJECT_ENVIRONMENT=/usr/local
 
 RUN <<EOF
 apt-get update
@@ -96,6 +98,6 @@ USER ${RELATE_USER}
 
 EXPOSE 8000
 
-CMD ["python", "manage.py", "runserver", "0:8000"]
+CMD ["uv", "run", "python", "manage.py", "runserver", "0:8000"]
 
 # vim:set filetype=dockerfile:
