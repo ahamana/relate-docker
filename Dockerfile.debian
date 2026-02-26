@@ -59,7 +59,7 @@ rm \
     TODO \
     update.sh \
     uv.lock
-find \
+find . \
     -type f \
     \( \
         -name .gitignore \
