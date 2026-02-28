@@ -46,6 +46,7 @@ rm \
     .eslintrc.js \
     .gitlab-ci.yml \
     .gitmodules \
+    AGENTS.md \
     docker-clean-containers.sh \
     exercise-docker.py \
     LICENSE \
