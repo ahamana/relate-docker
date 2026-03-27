@@ -43,7 +43,6 @@ rm -rf \
     tests
 rm \
     .editorconfig \
-    .eslintrc.js \
     .gitlab-ci.yml \
     .gitmodules \
     AGENTS.md \
