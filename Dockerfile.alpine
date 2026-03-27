@@ -25,8 +25,7 @@ RUN apk add --no-cache \
     alpine-sdk \
     cargo \
     libffi-dev \
-    libpq-dev \
-    rust
+    libpq-dev
 
 ADD --link https://api.github.com/repos/inducer/relate/git/refs/heads/${GIT_BRANCH} /dev/null
 RUN git clone -b ${GIT_BRANCH} --depth 1 https://github.com/inducer/relate.git ${RELATE_HOME}
