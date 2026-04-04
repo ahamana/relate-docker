@@ -39,6 +39,7 @@ npm run build
 uv sync --extra postgres
 
 rm -rf \
+    .basedpyright \
     .ci \
     .git \
     .github \
@@ -81,6 +82,8 @@ ARG RELATE_HOME
 ARG RELATE_GROUP_ID=1000
 ARG RELATE_USER_ID=1000
 ARG RELATE_USER=relate
+
+ENV UV_NO_CACHE=true
 
 RUN <<EOF
 apk add --no-cache \
