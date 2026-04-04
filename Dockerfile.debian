@@ -46,6 +46,7 @@ rm \
     .gitlab-ci.yml \
     .gitmodules \
     AGENTS.md \
+    biome.json \
     CLAUDE.md \
     docker-clean-containers.sh \
     exercise-docker.py \
