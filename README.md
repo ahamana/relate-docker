@@ -15,29 +15,29 @@ This repository provides Docker configurations for running [Relate](https://gith
 
 ## Quick Start
 
-### Debian-based Set up
+### Debian-based
 
-```bash
-task setup DISTRIBUTION=debian
-```
+| Operation | Command                          |
+| --------- | -------------------------------- |
+| Set up    | `task setup DISTRIBUTION=debian` |
+| Start     | `task start DISTRIBUTION=debian` |
+| Stop      | `task stop DISTRIBUTION=debian`  |
 
-### Alpine-based Set up
+### Alpine-based
 
-```bash
-task setup DISTRIBUTION=alpine
-```
+| Operation | Command                          |
+| --------- | -------------------------------- |
+| Set up    | `task setup DISTRIBUTION=alpine` |
+| Start     | `task start DISTRIBUTION=alpine` |
+| Stop      | `task stop DISTRIBUTION=alpine`  |
 
-### Debian-based Start
+## Services
 
-```bash
-task start DISTRIBUTION=debian
-```
-
-### Alpine-based Start
-
-```bash
-task start DISTRIBUTION=alpine
-```
+| Service    | Role             | Endpoint                |
+| ---------- | ---------------- | ----------------------- |
+| Relate     | Relate interface | `http://localhost`      |
+| PostgreSQL | Database         | `localhost:5432`        |
+| Mailpit    | Email testing    | `http://localhost:8025` |
 
 ## Configuration
 
@@ -45,61 +45,19 @@ The environment is configured through the `.env` file which contains all the nec
 
 ### Default Settings
 
-- `EMAIL_DOMAIN`: example.com
-  - Specifies the domain part of email addresses.
-- `EMAIL_HOST_USER`: (empty)
-  - Authentication username for the SMTP server.<br>
-    Can be left empty when using Mailpit.
-- `EMAIL_HOST_PASSWORD`: (empty)
-  - Authentication password for the SMTP server.<br>
-    Can be left empty when using Mailpit.
-- `RELATE_DOMAIN`: localhost
-  - Specifies the domain name for the Relate application.<br>
-    Can be kept as "localhost" for local environments.
-- `RELATE_ADMIN_USER`: admin
-  - Username for the administrator account.<br>
-    Automatically created on first startup.
-- `RELATE_ADMIN_PASSWORD`: ${RELATE_ADMIN_USER} (admin)
-  - Password for the administrator account.<br>
-    By default, it uses the same value as the username.
-- `RELATE_ADMIN_EMAIL`: ${RELATE_ADMIN_USER}@${EMAIL_DOMAIN} (admin@example.com)
-  - Email address for the administrator account.<br>
-    Automatically generated from the username and email domain.
-- `POSTGRES_USER`: relate
-  - PostgreSQL database username.
-- `POSTGRES_PASSWORD`: relate
-  - PostgreSQL database password.<br>
-    Recommended to change to a strong password in production environments.
-- `POSTGRES_DB`: relate
-  - PostgreSQL database name.
-- `TZ`: UTC
-  - Specifies the timezone.
-
-## Services
-
-The environment provides:
-
-- Database
-  - PostgreSQL
-- Email testing
-  - Mailpit
-    - Accessible at `http://localhost:8025`
-- Relate interface
-  - `http://localhost`
-
-## Stop
-
-### Debian-based Stop
-
-```bash
-task stop DISTRIBUTION=debian
-```
-
-### Alpine-based Stop
-
-```bash
-task stop DISTRIBUTION=alpine
-```
+| Variable                | Default                                | Description                                                                                                 |
+| ----------------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `EMAIL_DOMAIN`          | `example.com`                          | Specifies the domain part of email addresses.                                                               |
+| `EMAIL_HOST_USER`       | (empty)                                | Authentication username for the SMTP server.<br>Can be left empty when using Mailpit.                       |
+| `EMAIL_HOST_PASSWORD`   | (empty)                                | Authentication password for the SMTP server.<br>Can be left empty when using Mailpit.                       |
+| `RELATE_DOMAIN`         | `localhost`                            | Specifies the domain name for the Relate application.<br>Can be kept as "localhost" for local environments. |
+| `RELATE_ADMIN_USER`     | `admin`                                | Username for the administrator account.<br>Automatically created on first startup.                          |
+| `RELATE_ADMIN_PASSWORD` | `${RELATE_ADMIN_USER}`                 | Password for the administrator account.<br>By default, it uses the same value as the username.              |
+| `RELATE_ADMIN_EMAIL`    | `${RELATE_ADMIN_USER}@${EMAIL_DOMAIN}` | Email address for the administrator account.<br>Automatically generated from the username and email domain. |
+| `POSTGRES_USER`         | `relate`                               | PostgreSQL database username.                                                                               |
+| `POSTGRES_PASSWORD`     | `relate`                               | PostgreSQL database password.<br>Recommended to change to a strong password in production environments.     |
+| `POSTGRES_DB`           | `relate`                               | PostgreSQL database name.                                                                                   |
+| `TZ`                    | `UTC`                                  | Specifies the timezone.                                                                                     |
 
 ## License
 
