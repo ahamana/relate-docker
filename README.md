@@ -1,5 +1,7 @@
 # Relate Docker
 
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 This repository provides Docker configurations for running [Relate](https://github.com/inducer/relate) in a containerized environment.
 
 ## Features
@@ -58,7 +60,3 @@ The environment is configured through the `.env` file which contains all the nec
 | `POSTGRES_PASSWORD`     | `relate`                               | PostgreSQL database password.<br>Recommended to change to a strong password in production environments.     |
 | `POSTGRES_DB`           | `relate`                               | PostgreSQL database name.                                                                                   |
 | `TZ`                    | `UTC`                                  | Specifies the timezone.                                                                                     |
-
-## License
-
-See the [LICENSE](LICENSE) file for details.
