@@ -7,5 +7,8 @@
       "source.fixAll": "explicit",
       "source.organizeImports": "explicit"
     }
+  },
+  "[toml]": {
+    "editor.defaultFormatter": "tombi-toml.tombi"
   }
 }

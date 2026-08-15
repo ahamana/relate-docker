@@ -7,5 +7,6 @@
 compose.yml
 Dockerfile*
 LICENSE
+mise.toml
 relate
 Taskfile.yml
