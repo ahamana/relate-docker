@@ -4,10 +4,16 @@
 .git
 .github
 .gitignore
+.lefthookrc
+.oxfmtrc.json
 .vscode
 compose.yml
 Dockerfile*
+lefthook.yml
 LICENSE
 mise.toml
+node_modules
+package.json
+pnpm-lock.yaml
 relate
 Taskfile.yml
