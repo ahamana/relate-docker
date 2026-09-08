@@ -3,9 +3,6 @@ name: Docker
 on:
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 env:
   REGISTRY_IMAGE: ${{ github.repository_owner }}/relate
 
@@ -13,6 +10,8 @@ jobs:
   build:
     name: Build
     runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: read
     strategy:
       matrix:
         os:
@@ -100,6 +99,8 @@ jobs:
   read-matrix:
     name: Read Matrix
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     needs: build
     outputs:
       result: ${{ steps.read-matrix.outputs.result }}
@@ -114,6 +115,8 @@ jobs:
   merge:
     name: Merge
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     needs: read-matrix
     strategy:
       matrix:
