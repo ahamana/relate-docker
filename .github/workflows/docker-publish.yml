@@ -15,10 +15,10 @@ jobs:
       contents: read
     strategy:
       matrix:
-        os: &matrix-os
+        os: &os
           - alpine
           - debian
-        python-version: &matrix-python-version
+        python-version: &python-version
           - "3.12"
           - "3.13"
           - "3.14"
@@ -99,8 +99,8 @@ jobs:
     needs: build
     strategy:
       matrix:
-        os: *matrix-os
-        python-version: *matrix-python-version
+        os: *os
+        python-version: *python-version
 
     steps:
       - *docker-login
