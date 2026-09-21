@@ -26,6 +26,7 @@
       "extensions": [
         "bierner.markdown-preview-github-styles",
         "charliermarsh.ruff",
+        "davidanson.vscode-markdownlint",
         "eamodio.gitlens",
         "exiasr.hadolint",
         "github.vscode-github-actions",
